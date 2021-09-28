@@ -10,9 +10,9 @@
 //s: time in s
 public struct GCode_M01: GCodeDecodeable {
     public let letter: Letter = .M1
-    public var n: Int? = nil
-    public var p: Float? = nil
-    public var s: Float? = nil
+    public var n: Int?
+    public var p: Float?
+    public var s: Float?
 
         
     public init(gcode: GCode) throws {
@@ -29,15 +29,19 @@ public struct GCode_M01: GCodeDecodeable {
 //S: Servo position to set. Omit to read the current position.
 public struct GCode_M280: GCodeDecodeable {
     public let letter: Letter = .M280
-    public var n: Int? = nil
-    public var p: Int? = nil
-    public var s: Float? = nil
+    public var n: Int?
+    public var p: Int
+    public var s: Float?
 
         
     public init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
-        p = gcode.p == nil ? nil :try Decoder.decode(Int.self, gcode.p!)
+        
+        guard let pV = gcode.p else {
+            throw DecodingError.missingValue(type: String("M280 need p Value"))
+        }
+        p = try Decoder.decode(Int.self, pV)
         s = gcode.s == nil ? nil : try Decoder.decode(Float.self, gcode.s!)
     }
     
