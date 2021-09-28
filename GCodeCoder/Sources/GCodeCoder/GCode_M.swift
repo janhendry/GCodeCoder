@@ -8,14 +8,14 @@
 //Pause after the last movement and wait for the user to continue
 //p: time in ms
 //s: time in s
-struct GCode_M01: GCodeDecodeable {
+public struct GCode_M01: GCodeDecodeable {
     let letter: Letter = .M1
     var n: Int? = nil
     var p: Float? = nil
     var s: Float? = nil
 
         
-    init(gcode: GCode) throws {
+    public init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: .M1) }
         n = gcode.n
         p = gcode.p == nil ? nil : try Decoder.decode(Float.self,gcode.p!)
@@ -27,14 +27,14 @@ struct GCode_M01: GCodeDecodeable {
 //Set or get the position of a servo.
 //P: Servo index to set or get
 //S: Servo position to set. Omit to read the current position.
-struct GCode_M280: GCodeDecodeable {
+public struct GCode_M280: GCodeDecodeable {
     let letter: Letter = .M280
     var n: Int? = nil
     var p: Float? = nil
     var s: Float? = nil
 
         
-    init(gcode: GCode) throws {
+    public init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
         p = gcode.p == nil ? nil :try Decoder.decode(Float.self, gcode.p!)

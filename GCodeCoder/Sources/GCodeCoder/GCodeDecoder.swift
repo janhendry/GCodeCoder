@@ -5,14 +5,14 @@
 //  Created by Jan Anstipp on 25.09.21.
 //
 
-protocol GCodeDecodeable{
+public protocol GCodeDecodeable{
     init(gcode: GCode) throws
 
 }
 
-class GCodeDecoder {
+open class GCodeDecoder {
     
-    static func decode(data: String) throws -> [GCodeDecodeable]{
+    public static func decode(data: String) throws -> [GCodeDecodeable]{
         var data: Substring = Substring(data)
     
         var list: [GCodeDecodeable] = []
@@ -27,7 +27,7 @@ class GCodeDecoder {
         return list
     }
     
-    static func decode(line: Substring) throws -> GCodeDecodeable?{
+    public static func decode(line: Substring) throws -> GCodeDecodeable?{
         let parser: GCodeParser = GCodeParser()
         let entryList: [(Character,String?)] = parser.parseLine(String(line))
         if entryList.isEmpty { return nil }

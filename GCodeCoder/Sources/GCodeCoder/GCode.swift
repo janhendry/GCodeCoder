@@ -4,7 +4,7 @@
 //
 //  Created by Jan Anstipp on 14.08.21.
 
-struct GCode: Equatable, Codable {
+public struct GCode: Equatable, Codable {
     var letter: Letter
     var n: Int? = nil
     var x: String? = nil
@@ -66,7 +66,7 @@ struct GCode: Equatable, Codable {
         }
     }
     
-    static func ==(lhs: Self, rhs: Self) -> Bool {
+    public static func ==(lhs: Self, rhs: Self) -> Bool {
         return (lhs.letter == rhs.letter && lhs.n == rhs.n && lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z && lhs.p == rhs.p && lhs.s == rhs.s && lhs.f == rhs.f && lhs.e == rhs.e)
     }
     

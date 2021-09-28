@@ -10,7 +10,7 @@ enum LetterType: Character {
     case M = "M"
 }
 
-enum Letter: String, Codable{
+public enum Letter: String, Codable{
     case G01    = "G1"
     case G04    = "G4"
     case M1     = "M1"

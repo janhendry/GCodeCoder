@@ -6,7 +6,7 @@
 //
 
 
-struct GCode_G01: GCodeDecodeable {
+public struct GCode_G01: GCodeDecodeable {
     let n: Int?
     let letter: Letter = .G01
     
@@ -17,7 +17,7 @@ struct GCode_G01: GCodeDecodeable {
     var y: Float?
     var z: Float?
     
-    init(gcode: GCode) throws {
+    public init(gcode: GCode) throws {
        
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
@@ -37,13 +37,13 @@ struct GCode_G01: GCodeDecodeable {
 //Dwell pauses the command queue and waits for a period of time.
 //p: time in ms
 //s: time in s
-struct GCode_G04: GCodeDecodeable {
+public struct GCode_G04: GCodeDecodeable {
     let letter: Letter = .G04
     var n: Int? = nil
     var p: Float? = nil
     var s: Float? = nil
         
-    init(gcode: GCode) throws {
+    public init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
         p = gcode.p == nil ? nil :try Decoder.decode(Float.self,gcode.p!)
