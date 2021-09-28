@@ -5,17 +5,17 @@
 //  Created by Jan Anstipp on 14.08.21.
 
 public struct GCode: Equatable, Codable {
-    var letter: Letter
-    var n: Int? = nil
-    var x: String? = nil
-    var y: String? = nil
-    var z: String? = nil
-    var p: String? = nil
-    var s: String? = nil
-    var f: String? = nil
-    var e: String? = nil
+    public var letter: Letter
+    public var n: Int? = nil
+    public var x: String? = nil
+    public var y: String? = nil
+    public var z: String? = nil
+    public var p: String? = nil
+    public var s: String? = nil
+    public var f: String? = nil
+    public var e: String? = nil
     
-    init(letter: Letter, n: Int? = nil, x: String? = nil, y: String? = nil, z: String? = nil, p: String? = nil, s : String? = nil, f: String? = nil, e: String? = nil ) {
+    public init(letter: Letter, n: Int? = nil, x: String? = nil, y: String? = nil, z: String? = nil, p: String? = nil, s : String? = nil, f: String? = nil, e: String? = nil ) {
         self.letter = letter
         self.n = n
         self.x = x

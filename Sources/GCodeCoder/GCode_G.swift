@@ -7,15 +7,15 @@
 
 
 public struct GCode_G01: GCodeDecodeable {
-    let n: Int?
-    let letter: Letter = .G01
+    public let n: Int?
+    public let letter: Letter = .G01
     
-    var e: Float?
-    var f: Float?
-    var s: Float?
-    var x: Float?
-    var y: Float?
-    var z: Float?
+    public var e: Float?
+    public var f: Float?
+    public var s: Float?
+    public var x: Float?
+    public var y: Float?
+    public var z: Float?
     
     public init(gcode: GCode) throws {
        
@@ -38,10 +38,10 @@ public struct GCode_G01: GCodeDecodeable {
 //p: time in ms
 //s: time in s
 public struct GCode_G04: GCodeDecodeable {
-    let letter: Letter = .G04
-    var n: Int? = nil
-    var p: Float? = nil
-    var s: Float? = nil
+    public let letter: Letter = .G04
+    public var n: Int? = nil
+    public var p: Float? = nil
+    public var s: Float? = nil
         
     public init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
