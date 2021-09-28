@@ -20,24 +20,27 @@ open class GCodeDecoder {
         while !data.isEmpty {
             let nextLine = nextLine(&data)
             
-            if let gcode = try decode(line: nextLine) {
+            if let gcode = try decode(line: String(nextLine)) {
                 list.append( gcode)
             }
         }
         return list
     }
     
-    public static func decode(line: Substring) throws -> GCodeDecodeable?{
+    public static func decode(line: String) throws -> GCodeDecodeable?{
         let parser: GCodeParser = GCodeParser()
-        let entryList: [(Character,String?)] = parser.parseLine(String(line))
+        let entryList: [(Character,String?)] = parser.parseLine(line)
         if entryList.isEmpty { return nil }
         
         if isSbDuplicated(entryList) {
-            throw GCodeDecoderError.findDuplicated(String(line))
+            throw GCodeDecoderError.findDuplicated(line)
         }
         
         let gcode = try GCode(entryList)
-        
+        return try decode(gcode: gcode)
+    }
+    
+    public static func decode(gcode: GCode) throws -> GCodeDecodeable {
         switch gcode.letter{
         case .G01:
             return try GCode_G01(gcode: gcode)
