@@ -7,6 +7,7 @@
 
 public protocol GCodeDecodeable{
     init(gcode: GCode) throws
+    var letter: Letter { get }
 
 }
 
