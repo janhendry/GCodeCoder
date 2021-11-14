@@ -17,6 +17,16 @@ public struct GCode_G01: GCodeDecodeable {
     public var y: Float?
     public var z: Float?
     
+    public init(n: Int? = nil, e: Float? = nil ,f: Float?  = nil ,s: Float?  = nil ,x: Float?  = nil ,y: Float?  = nil ,z: Float? = nil){
+        self.n = n
+        self.e = e
+        self.f = f
+        self.s = s
+        self.x = x
+        self.y = y
+        self.z = z
+    }
+    
     public init(gcode: GCode) throws {
        
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
@@ -43,6 +53,12 @@ public struct GCode_G04: GCodeDecodeable {
     public var p: Float? = nil
     public var s: Float? = nil
         
+    public init(n: Int? = nil, p: Float? = nil , s: Float? = nil){
+        self.n = n
+        self.p = p
+        self.s = s
+    }
+    
     public init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
@@ -51,5 +67,27 @@ public struct GCode_G04: GCodeDecodeable {
     }
 }
 
-
-
+//G6 - Direct Stepper Move
+public struct GCode_G06: GCodeDecodeable {
+    public let letter: Letter = .G06
+    public var n: Int? = nil
+    public var x: Int?
+    public var y: Int?
+    public var z: Int?
+    
+    public init(n: Int? = nil, x: Int?  = nil ,y: Int?  = nil ,z: Int? = nil){
+        self.n = n
+        self.x = x
+        self.y = y
+        self.z = z
+    }
+    
+    public init(gcode: GCode) throws {
+       
+        if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
+        n = gcode.n
+        x = gcode.x == nil ? nil :try Decoder.decode(Int.self,gcode.x!)
+        y = gcode.y == nil ? nil :try Decoder.decode(Int.self,gcode.y!)
+        z = gcode.z == nil ? nil :try Decoder.decode(Int.self,gcode.z!)
+    }
+}

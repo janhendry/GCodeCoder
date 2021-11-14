@@ -14,6 +14,11 @@ public struct GCode_M01: GCodeDecodeable {
     public var p: Float?
     public var s: Float?
 
+    public init(n: Int? = nil, p: Float? = nil, s: Float? = nil){
+        self.n = n
+        self.p = p
+        self.s = s
+    }
         
     public init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: .M1) }
@@ -21,8 +26,9 @@ public struct GCode_M01: GCodeDecodeable {
         p = gcode.p == nil ? nil : try Decoder.decode(Float.self,gcode.p!)
         s = gcode.s == nil ? nil :try Decoder.decode(Float.self,gcode.s!)
     }
-    
 }
+
+
 
 //Set or get the position of a servo.
 //P: Servo index to set or get
@@ -33,7 +39,13 @@ public struct GCode_M280: GCodeDecodeable {
     public var p: Int
     public var s: Float?
 
-        
+     
+    public init(n: Int? = nil, p: Int, s: Float? = nil){
+        self.n = n
+        self.p = p
+        self.s = s
+    }
+    
     public init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n

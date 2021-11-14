@@ -13,6 +13,7 @@ enum LetterType: Character {
 public enum Letter: String, Codable{
     case G01    = "G1"
     case G04    = "G4"
+    case G06    = "G6"
     case M1     = "M1"
     case M280   = "M280"
     
@@ -20,6 +21,7 @@ public enum Letter: String, Codable{
         switch self {
         case .G01:  return (.G, 1)
         case .G04:  return (.G, 4)
+        case .G06:  return (.G, 6)
         case .M1:   return (.M, 1)
         case .M280: return (.M, 280)
         }
@@ -32,6 +34,7 @@ public enum Letter: String, Codable{
             switch number {
             case 1: self    = .G01
             case 4: self    = .G04
+            case 6: self    = .G06
             default:        throw LetterError.Incorrect(header,String(number))
             }
         case "M":

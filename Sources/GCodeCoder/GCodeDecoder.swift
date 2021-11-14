@@ -8,14 +8,14 @@
 public protocol GCodeDecodeable{
     init(gcode: GCode) throws
     var letter: Letter { get }
-
+    
 }
 
 open class GCodeDecoder {
     
     public static func decode(data: String) throws -> [GCodeDecodeable]{
         var data: Substring = Substring(data)
-    
+        
         var list: [GCodeDecodeable] = []
         
         while !data.isEmpty {
@@ -43,14 +43,16 @@ open class GCodeDecoder {
     
     public static func decode(gcode: GCode) throws -> GCodeDecodeable {
         switch gcode.letter{
-        case .G01:
-            return try GCode_G01(gcode: gcode)
-        case .G04:
-            return try GCode_G04(gcode: gcode)
-        case .M1:
-            return try GCode_M01(gcode: gcode)
-        case .M280:
-            return try GCode_M280(gcode: gcode)
+            case .G01:
+                return try GCode_G01(gcode: gcode)
+            case .G04:
+                return try GCode_G04(gcode: gcode)
+            case .G06:
+                return try GCode_G06(gcode: gcode)
+            case .M1:
+                return try GCode_M01(gcode: gcode)
+            case .M280:
+                return try GCode_M280(gcode: gcode)
         }
     }
     
