@@ -7,6 +7,15 @@
 
 class Decoder{
     
+    static func decode<T>(_ type: T.Type,_ element: String?) throws -> T?{
+        if let element = element {
+            let value = try Decoder.decode(type, element)
+            return value
+        }
+        return nil
+//        throw DecodingError.invadlideType(type: String(describing: type), element: element)
+    }
+    
     
     static func decode<T>(_ type: T.Type,_ element: String) throws -> T{
         throw DecodingError.invadlideType(type: String(describing: type), element: element)

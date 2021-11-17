@@ -13,6 +13,7 @@ enum Header: Character{
     case F = "F"
     case P = "P"
     case S = "S"
+    case R = "R"
     case G = "G"
     case M = "M"
  }

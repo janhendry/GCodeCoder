@@ -43,6 +43,8 @@ open class GCodeDecoder {
     
     public static func decode(gcode: GCode) throws -> GCodeDecodeable {
         switch gcode.letter{
+            case .G00:
+                return try GCode_G00(gcode: gcode)
             case .G01:
                 return try GCode_G01(gcode: gcode)
             case .G04:

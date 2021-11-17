@@ -4,7 +4,7 @@
 //
 //  Created by Jan Anstipp on 14.08.21.
 
-public struct GCode: Equatable, Codable {
+public class GCode: Equatable, Codable {
     public var letter: Letter
     public var n: Int? = nil
     public var x: String? = nil
@@ -12,6 +12,7 @@ public struct GCode: Equatable, Codable {
     public var z: String? = nil
     public var p: String? = nil
     public var s: String? = nil
+    public var r: String? = nil
     public var f: String? = nil
     public var e: String? = nil
     
@@ -51,6 +52,8 @@ public struct GCode: Equatable, Codable {
                 p = item.1
             case .S:
                 s = item.1
+            case .R:
+                r = item.1
             case .G, .M:
                 guard let str = item.1, let number = Int(str) else { throw LetterError.Incorrect(item.0, item.1 ?? "") }
                 letter = try Letter(header: item.0, number: number )
@@ -66,7 +69,7 @@ public struct GCode: Equatable, Codable {
         }
     }
     
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
+    public static func ==(lhs: GCode, rhs: GCode) -> Bool {
         return (lhs.letter == rhs.letter && lhs.n == rhs.n && lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z && lhs.p == rhs.p && lhs.s == rhs.s && lhs.f == rhs.f && lhs.e == rhs.e)
     }
     
