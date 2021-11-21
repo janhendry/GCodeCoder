@@ -51,21 +51,16 @@ final class TestGCode: XCTestCase {
         }
     }
     
-    
-    func testGCodeDecoder(){
-        
-        
-    }
-    
-    
     func testGCodeS(){
         
         let paraList: [(Character,String?)] = [("G","1"),("X","73.65")]
-        let gcode = GCode(letter: .G01,x: "73.6585")
+        let gcode = GCode(letter: .G01,x: "73.65")
         
-        let g = try? GCode(paraList)
-        _ = gcode == g!
-                
+        guard let g = try? GCode(paraList) else {
+            XCTFail("Decoding Fail")
+            return
+        }
+        XCTAssertTrue(gcode == g)
     }
     
     func testDecoder() throws {
@@ -74,8 +69,6 @@ final class TestGCode: XCTestCase {
         } catch {
             XCTFail()
         }
-        
-          
     }
     
 }
