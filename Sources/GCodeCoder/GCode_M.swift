@@ -37,10 +37,10 @@ public class GCode_M280: GCodeDecodeable {
     public let letter: Letter = .M280
     public var n: Int?
     public var p: Int
-    public var s: Float?
+    public var s: Int?
 
      
-    public init(n: Int? = nil, p: Int, s: Float? = nil){
+    public init(n: Int? = nil, p: Int, s: Int? = nil){
         self.n = n
         self.p = p
         self.s = s
@@ -54,7 +54,7 @@ public class GCode_M280: GCodeDecodeable {
             throw DecodingError.missingValue(type: String("M280 need p Value"))
         }
         p = try Decoder.decode(Int.self, pV)
-        s = try Decoder.decode(Float.self, gcode.s)
+        s = try Decoder.decode(Int.self, gcode.s)
     }
     
 }

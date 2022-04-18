@@ -51,6 +51,8 @@ open class GCodeDecoder {
                 return try GCode_G04(gcode: gcode)
             case .G06:
                 return try GCode_G06(gcode: gcode)
+            case .G92:
+                return try GCode_G92(gcode: gcode)
             case .M1:
                 return try GCode_M01(gcode: gcode)
             case .M280:

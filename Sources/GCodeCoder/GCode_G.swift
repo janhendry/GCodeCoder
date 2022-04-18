@@ -128,3 +128,28 @@ public class GCode_G06: GCodeDecodeable {
         z = try Decoder.decode(Int.self,gcode.z)
     }
 }
+
+//G92 - Set the current position.
+public class GCode_G92: GCodeDecodeable {
+    public let letter: Letter = .G92
+    public var n: Int? = nil
+    public var x: Float?
+    public var y: Float?
+    public var z: Float?
+    
+    public init(n: Int? = nil, x: Float?  = nil ,y: Float?  = nil ,z: Float? = nil){
+        self.n = n
+        self.x = x
+        self.y = y
+        self.z = z
+    }
+    
+    required public init(gcode: GCode) throws {
+       
+        if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
+        n = gcode.n
+        x = try Decoder.decode(Float.self,gcode.x)
+        y = try Decoder.decode(Float.self,gcode.y)
+        z = try Decoder.decode(Float.self,gcode.z)
+    }
+}
