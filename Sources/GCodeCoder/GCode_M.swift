@@ -11,10 +11,10 @@
 public class GCode_M01: GCodeDecodeable {
     public let letter: Letter = .M1
     public var n: Int?
-    public var p: Float?
-    public var s: Float?
+    public var p: Double?
+    public var s: Double?
 
-    public init(n: Int? = nil, p: Float? = nil, s: Float? = nil){
+    public init(n: Int? = nil, p: Double? = nil, s: Double? = nil){
         self.n = n
         self.p = p
         self.s = s
@@ -23,8 +23,8 @@ public class GCode_M01: GCodeDecodeable {
     required public init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: .M1) }
         n = gcode.n
-        p = try Decoder.decode(Float.self,gcode.p)
-        s = try Decoder.decode(Float.self,gcode.s)
+        p = try Decoder.decode(Double.self,gcode.p)
+        s = try Decoder.decode(Double.self,gcode.s)
     }
 }
 

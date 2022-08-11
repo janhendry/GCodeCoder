@@ -8,14 +8,14 @@
 public class GCode_G00: GCodeDecodeable {
     public let n: Int?
     public let letter: Letter = .G00
-    public var e: Float?
-    public var f: Float?
-    public var s: Float?
-    public var x: Float?
-    public var y: Float?
-    public var z: Float?
+    public var e: Double?
+    public var f: Double?
+    public var s: Double?
+    public var x: Double?
+    public var y: Double?
+    public var z: Double?
     
-    public init(n: Int? = nil, e: Float? = nil ,f: Float?  = nil ,s: Float?  = nil ,x: Float?  = nil ,y: Float?  = nil ,z: Float? = nil){
+    public init(n: Int? = nil, e: Double? = nil ,f: Double?  = nil ,s: Double?  = nil ,x: Double?  = nil ,y: Double?  = nil ,z: Double? = nil){
         self.n = n
         self.e = e
         self.f = f
@@ -30,13 +30,13 @@ public class GCode_G00: GCodeDecodeable {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
         
-        e = try Decoder.decode(Float.self,gcode.e)
-        f = try Decoder.decode(Float.self,gcode.f)
-        s = try Decoder.decode(Float.self,gcode.s)
+        e = try Decoder.decode(Double.self,gcode.e)
+        f = try Decoder.decode(Double.self,gcode.f)
+        s = try Decoder.decode(Double.self,gcode.s)
         
-        x = try Decoder.decode(Float.self,gcode.x)
-        y = try Decoder.decode(Float.self,gcode.y)
-        z = try Decoder.decode(Float.self,gcode.z)
+        x = try Decoder.decode(Double.self,gcode.x)
+        y = try Decoder.decode(Double.self,gcode.y)
+        z = try Decoder.decode(Double.self,gcode.z)
         
     }
 }
@@ -45,15 +45,15 @@ public class GCode_G01: GCodeDecodeable {
     public let n: Int?
     public let letter: Letter = .G01
     
-    public var e: Float?
-    public var f: Float?
-    public var s: Float?
-    public var r: Float?
-    public var x: Float?
-    public var y: Float?
-    public var z: Float?
+    public var e: Double?
+    public var f: Double?
+    public var s: Double?
+    public var r: Double?
+    public var x: Double?
+    public var y: Double?
+    public var z: Double?
     
-    public init(n: Int? = nil, e: Float? = nil ,f: Float?  = nil ,s: Float?  = nil,r: Float?  = nil ,x: Float?  = nil ,y: Float?  = nil ,z: Float? = nil){
+    public init(n: Int? = nil, e: Double? = nil ,f: Double?  = nil ,s: Double?  = nil,r: Double?  = nil ,x: Double?  = nil ,y: Double?  = nil ,z: Double? = nil){
         self.n = n
         self.e = e
         self.f = f
@@ -69,14 +69,14 @@ public class GCode_G01: GCodeDecodeable {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
         
-        e = try Decoder.decode(Float.self,gcode.e)
-        f = try Decoder.decode(Float.self,gcode.f)
-        s = try Decoder.decode(Float.self,gcode.s)
-        r = try Decoder.decode(Float.self,gcode.r)
+        e = try Decoder.decode(Double.self,gcode.e)
+        f = try Decoder.decode(Double.self,gcode.f)
+        s = try Decoder.decode(Double.self,gcode.s)
+        r = try Decoder.decode(Double.self,gcode.r)
         
-        x = try Decoder.decode(Float.self,gcode.x)
-        y = try Decoder.decode(Float.self,gcode.y)
-        z = try Decoder.decode(Float.self,gcode.z)
+        x = try Decoder.decode(Double.self,gcode.x)
+        y = try Decoder.decode(Double.self,gcode.y)
+        z = try Decoder.decode(Double.self,gcode.z)
         
     }
 }
@@ -87,10 +87,10 @@ public class GCode_G01: GCodeDecodeable {
 public class GCode_G04: GCodeDecodeable {
     public let letter: Letter = .G04
     public var n: Int? = nil
-    public var p: Float? = nil
-    public var s: Float? = nil
+    public var p: Double? = nil
+    public var s: Double? = nil
         
-    public init(n: Int? = nil, p: Float? = nil , s: Float? = nil){
+    public init(n: Int? = nil, p: Double? = nil , s: Double? = nil){
         self.n = n
         self.p = p
         self.s = s
@@ -99,8 +99,8 @@ public class GCode_G04: GCodeDecodeable {
     required public init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
-        p = try Decoder.decode(Float.self,gcode.p)
-        s = try Decoder.decode(Float.self,gcode.s)
+        p = try Decoder.decode(Double.self,gcode.p)
+        s = try Decoder.decode(Double.self,gcode.s)
     }
 }
 
@@ -133,11 +133,11 @@ public class GCode_G06: GCodeDecodeable {
 public class GCode_G92: GCodeDecodeable {
     public let letter: Letter = .G92
     public var n: Int? = nil
-    public var x: Float?
-    public var y: Float?
-    public var z: Float?
+    public var x: Double?
+    public var y: Double?
+    public var z: Double?
     
-    public init(n: Int? = nil, x: Float?  = nil ,y: Float?  = nil ,z: Float? = nil){
+    public init(n: Int? = nil, x: Double?  = nil ,y: Double?  = nil ,z: Double? = nil){
         self.n = n
         self.x = x
         self.y = y
@@ -148,8 +148,8 @@ public class GCode_G92: GCodeDecodeable {
        
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
-        x = try Decoder.decode(Float.self,gcode.x)
-        y = try Decoder.decode(Float.self,gcode.y)
-        z = try Decoder.decode(Float.self,gcode.z)
+        x = try Decoder.decode(Double.self,gcode.x)
+        y = try Decoder.decode(Double.self,gcode.y)
+        z = try Decoder.decode(Double.self,gcode.z)
     }
 }
