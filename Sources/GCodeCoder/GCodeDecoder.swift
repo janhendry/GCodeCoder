@@ -5,7 +5,7 @@
 //  Created by Jan Anstipp on 25.09.21.
 //
 
-public protocol GCodeDecodeable{
+public protocol GCodeDecodable{
     init(gcode: GCode) throws
     var letter: Letter { get }
     
@@ -13,10 +13,10 @@ public protocol GCodeDecodeable{
 
 open class GCodeDecoder {
     
-    public static func decode(data: String) throws -> [GCodeDecodeable]{
+    public static func decode(data: String) throws -> [GCodeDecodable]{
         var data: Substring = Substring(data)
         
-        var list: [GCodeDecodeable] = []
+        var list: [GCodeDecodable] = []
         
         while !data.isEmpty {
             let nextLine = nextLine(&data)
@@ -28,7 +28,7 @@ open class GCodeDecoder {
         return list
     }
     
-    public static func decode(line: String) throws -> GCodeDecodeable?{
+    public static func decode(line: String) throws -> GCodeDecodable?{
         let parser: GCodeParser = GCodeParser()
         let entryList: [(Character,String?)] = parser.parseLine(line)
         if entryList.isEmpty { return nil }
@@ -41,7 +41,7 @@ open class GCodeDecoder {
         return try decode(gcode: gcode)
     }
     
-    public static func decode(gcode: GCode) throws -> GCodeDecodeable {
+    public static func decode(gcode: GCode) throws -> GCodeDecodable {
         switch gcode.letter{
             case .G00:
                 return try GCode_G00(gcode: gcode)

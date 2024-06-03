@@ -8,13 +8,13 @@
 //Pause after the last movement and wait for the user to continue
 //p: time in ms
 //s: time in s
-public class GCode_M01: GCodeDecodeable {
+public class GCode_M01: GCodeDecodable {
     public let letter: Letter = .M1
     public var n: Int?
-    public var p: Double?
-    public var s: Double?
+    public var p: Float?
+    public var s: Float?
 
-    public init(n: Int? = nil, p: Double? = nil, s: Double? = nil){
+    public init(n: Int? = nil, p: Float? = nil, s: Float? = nil){
         self.n = n
         self.p = p
         self.s = s
@@ -23,8 +23,8 @@ public class GCode_M01: GCodeDecodeable {
     required public init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: .M1) }
         n = gcode.n
-        p = try Decoder.decode(Double.self,gcode.p)
-        s = try Decoder.decode(Double.self,gcode.s)
+        p = try Decoder.decode(Float.self,gcode.p)
+        s = try Decoder.decode(Float.self,gcode.s)
     }
 }
 
@@ -33,7 +33,7 @@ public class GCode_M01: GCodeDecodeable {
 //Set or get the position of a servo.
 //P: Servo index to set or get
 //S: Servo position to set. Omit to read the current position.
-public class GCode_M280: GCodeDecodeable {
+public class GCode_M280: GCodeDecodable {
     public let letter: Letter = .M280
     public var n: Int?
     public var p: Int
