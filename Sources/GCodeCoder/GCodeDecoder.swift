@@ -1,66 +1,64 @@
 //
-//  File.swift
-//  
+//  GCodeDecoder.swift
+//
 //
 //  Created by Jan Anstipp on 25.09.21.
 //
 
-public protocol GCodeDecodable{
+public protocol GCodeDecodable {
     init(gcode: GCode) throws
     var letter: Letter { get }
-    
 }
 
 open class GCodeDecoder {
-    
-    public static func decode(data: String) throws -> [GCodeDecodable]{
-        var data: Substring = Substring(data)
-        
+    public static func decode(data: String) throws -> [GCodeDecodable] {
+        var data = Substring(data)
+
         var list: [GCodeDecodable] = []
-        
+
         while !data.isEmpty {
             let nextLine = nextLine(&data)
-            
+
             if let gcode = try decode(line: String(nextLine)) {
-                list.append( gcode)
+                list.append(gcode)
             }
         }
         return list
     }
-    
-    public static func decode(line: String) throws -> GCodeDecodable?{
-        let parser: GCodeParser = GCodeParser()
-        let entryList: [(Character,String?)] = parser.parseLine(line)
+
+    public static func decode(line: String) throws -> GCodeDecodable? {
+        let parser = GCodeParser()
+        let entryList: [(Character, String?)] = parser.parseLine(line)
         if entryList.isEmpty { return nil }
-        
+
         if isSbDuplicated(entryList) {
             throw GCodeDecoderError.findDuplicated(line)
         }
-        
+
         let gcode = try GCode(entryList)
         return try decode(gcode: gcode)
     }
-    
+
     public static func decode(gcode: GCode) throws -> GCodeDecodable {
-        switch gcode.letter{
-            case .G00:
-                return try GCode_G00(gcode: gcode)
-            case .G01:
-                return try GCode_G01(gcode: gcode)
-            case .G04:
-                return try GCode_G04(gcode: gcode)
-            case .G06:
-                return try GCode_G06(gcode: gcode)
-            case .G92:
-                return try GCode_G92(gcode: gcode)
-            case .M1:
-                return try GCode_M01(gcode: gcode)
-            case .M280:
-                return try GCode_M280(gcode: gcode)
+        switch gcode.letter {
+        case .G00:
+            return try GCode_G00(gcode: gcode)
+        case .G01:
+            return try GCode_G01(gcode: gcode)
+        case .G04:
+            return try GCode_G04(gcode: gcode)
+        case .G06:
+            return try GCode_G06(gcode: gcode)
+        case .G92:
+            return try GCode_G92(gcode: gcode)
+        case .M1:
+            return try GCode_M01(gcode: gcode)
+        case .M280:
+            return try GCode_M280(gcode: gcode)
         }
     }
-    
-    static func isSbDuplicated(_ list: [(Character, String?)]) -> Bool{
+
+    static func isSbDuplicated(_ list: [(Character, String?)]) -> Bool {
         var charSet = Set<Character>()
         for entry in list {
             let x = charSet.insert(entry.0)
@@ -68,22 +66,21 @@ open class GCodeDecoder {
         }
         return false
     }
-    
-    static private func nextLine(_ data: inout Substring) -> Substring {
+
+    private static func nextLine(_ data: inout Substring) -> Substring {
         var line: Substring
-        if let index = data.firstIndex(of: "\n"){
-            line = data[data.startIndex..<index]
+        if let index = data.firstIndex(of: "\n") {
+            line = data[data.startIndex ..< index]
             while line.last == "\r" {
                 line = line.dropLast()
             }
-            data.removeSubrange(data.startIndex...index)
-            
-        }else{
+            data.removeSubrange(data.startIndex ... index)
+
+        } else {
             line = data
             data.removeAll()
         }
-        
+
         return line
     }
 }
-

@@ -1,11 +1,11 @@
 //
-//  File.swift
-//  
+//  Header.swift
+//
 //
 //  Created by Jan Anstipp on 26.09.21.
 //
 
-enum Header: Character{
+enum Header: Character {
     case X = "X"
     case Y = "Y"
     case Z = "Z"
@@ -16,4 +16,4 @@ enum Header: Character{
     case R = "R"
     case G = "G"
     case M = "M"
- }
+}
