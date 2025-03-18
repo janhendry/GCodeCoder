@@ -23,8 +23,8 @@ public class GCode_M01: GCodeDecodable {
     public required init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: .M1) }
         n = gcode.n
-        p = try Decoder.decode(Float.self, gcode.p)
-        s = try Decoder.decode(Float.self, gcode.s)
+        p = try ValueDecoder.decode(Float.self, gcode.p)
+        s = try ValueDecoder.decode(Float.self, gcode.s)
     }
 }
 
@@ -48,9 +48,9 @@ public class GCode_M280: GCodeDecodable {
         n = gcode.n
 
         guard let pV = gcode.p else {
-            throw DecodingError.missingValue(type: String("M280 need p Value"))
+            throw ValueDecodingError.missingValue(type: String("M280 need p Value"))
         }
-        p = try Decoder.decode(Int.self, pV)
-        s = try Decoder.decode(Int.self, gcode.s)
+        p = try ValueDecoder.decode(Int.self, pV)
+        s = try ValueDecoder.decode(Int.self, gcode.s)
     }
 }

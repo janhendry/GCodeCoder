@@ -29,13 +29,13 @@ public class GCode_G00: GCodeDecodable {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
 
-        e = try Decoder.decode(Float.self, gcode.e)
-        f = try Decoder.decode(Float.self, gcode.f)
-        s = try Decoder.decode(Float.self, gcode.s)
+        e = try ValueDecoder.decode(Float.self, gcode.e)
+        f = try ValueDecoder.decode(Float.self, gcode.f)
+        s = try ValueDecoder.decode(Float.self, gcode.s)
 
-        x = try Decoder.decode(Float.self, gcode.x)
-        y = try Decoder.decode(Float.self, gcode.y)
-        z = try Decoder.decode(Float.self, gcode.z)
+        x = try ValueDecoder.decode(Float.self, gcode.x)
+        y = try ValueDecoder.decode(Float.self, gcode.y)
+        z = try ValueDecoder.decode(Float.self, gcode.z)
     }
 }
 
@@ -66,14 +66,14 @@ public class GCode_G01: GCodeDecodable {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
 
-        e = try Decoder.decode(Float.self, gcode.e)
-        f = try Decoder.decode(Float.self, gcode.f)
-        s = try Decoder.decode(Float.self, gcode.s)
-        r = try Decoder.decode(Float.self, gcode.r)
+        e = try ValueDecoder.decode(Float.self, gcode.e)
+        f = try ValueDecoder.decode(Float.self, gcode.f)
+        s = try ValueDecoder.decode(Float.self, gcode.s)
+        r = try ValueDecoder.decode(Float.self, gcode.r)
 
-        x = try Decoder.decode(Float.self, gcode.x)
-        y = try Decoder.decode(Float.self, gcode.y)
-        z = try Decoder.decode(Float.self, gcode.z)
+        x = try ValueDecoder.decode(Float.self, gcode.x)
+        y = try ValueDecoder.decode(Float.self, gcode.y)
+        z = try ValueDecoder.decode(Float.self, gcode.z)
     }
 }
 
@@ -95,8 +95,8 @@ public class GCode_G04: GCodeDecodable {
     public required init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
-        p = try Decoder.decode(Float.self, gcode.p)
-        s = try Decoder.decode(Float.self, gcode.s)
+        p = try ValueDecoder.decode(Float.self, gcode.p)
+        s = try ValueDecoder.decode(Float.self, gcode.s)
     }
 }
 
@@ -118,9 +118,9 @@ public class GCode_G06: GCodeDecodable {
     public required init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
-        x = try Decoder.decode(Int.self, gcode.x)
-        y = try Decoder.decode(Int.self, gcode.y)
-        z = try Decoder.decode(Int.self, gcode.z)
+        x = try ValueDecoder.decode(Int.self, gcode.x)
+        y = try ValueDecoder.decode(Int.self, gcode.y)
+        z = try ValueDecoder.decode(Int.self, gcode.z)
     }
 }
 
@@ -142,8 +142,8 @@ public class GCode_G92: GCodeDecodable {
     public required init(gcode: GCode) throws {
         if gcode.letter != letter { throw GCodeDecoderError.castError(from: gcode.letter, to: letter) }
         n = gcode.n
-        x = try Decoder.decode(Float.self, gcode.x)
-        y = try Decoder.decode(Float.self, gcode.y)
-        z = try Decoder.decode(Float.self, gcode.z)
+        x = try ValueDecoder.decode(Float.self, gcode.x)
+        y = try ValueDecoder.decode(Float.self, gcode.y)
+        z = try ValueDecoder.decode(Float.self, gcode.z)
     }
 }

@@ -93,4 +93,7 @@ iOSInjectionProject/
 
 *.resolved
 
-.swiftpm/xcode/package.xcworkspace/
+.swiftpm/
+
+.copyignore
+.swift-version
